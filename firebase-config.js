@@ -17,19 +17,4 @@ firebase.initializeApp(firebaseConfig);
 // Obter referência do Firestore
 const db = firebase.firestore();
 
-// Configurar para usar cache ilimitado
-db.settings({
-  cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED
-});
-
-// Persistência offline desabilitada temporariamente para debug
-// db.enablePersistence()
-//   .catch((err) => {
-//     if (err.code == 'failed-precondition') {
-//       console.warn('⚠️ Persistência: Múltiplas abas abertas');
-//     } else if (err.code == 'unimplemented') {
-//       console.warn('⚠️ Persistência: Navegador não suporta');
-//     }
-//   });
-
 console.log('✅ Firebase inicializado com sucesso!');

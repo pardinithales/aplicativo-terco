@@ -87,44 +87,44 @@ class PastoralManager {
         const grupos = {
             'sabado-19h30': {
                 casais: [
-                    { id: 1, nome1: 'Ana Letícia', nome2: 'Alexandre', telefone: '17 99000-0001', cadastroEm: '2025-12-19T10:00:00' },
-                    { id: 2, nome1: 'Adriana', nome2: 'Claudio', telefone: '17 99000-0002', cadastroEm: '2025-12-19T10:05:00' },
-                    { id: 3, nome1: 'Regina', nome2: 'Inério', telefone: '17 99000-0003', cadastroEm: '2025-12-19T10:10:00' },
-                    { id: 4, nome1: 'Bárbara', nome2: 'Aroldo', telefone: '17 99000-0004', cadastroEm: '2025-12-19T10:15:00' },
-                    { id: 5, nome1: 'Edna', nome2: 'Celso', telefone: '17 99000-0005', cadastroEm: '2025-12-19T10:20:00' }
+                    { id: 1, nome1: 'Ana Letícia', telefone1: '17 99000-0001', nome2: 'Alexandre', telefone2: '17 99000-0002', cadastroEm: '2025-12-19T10:00:00' },
+                    { id: 2, nome1: 'Adriana', telefone1: '17 99000-0003', nome2: 'Claudio', telefone2: '17 99000-0004', cadastroEm: '2025-12-19T10:05:00' },
+                    { id: 3, nome1: 'Regina', telefone1: '17 99000-0005', nome2: 'Inério', telefone2: '17 99000-0006', cadastroEm: '2025-12-19T10:10:00' },
+                    { id: 4, nome1: 'Bárbara', telefone1: '17 99000-0007', nome2: 'Aroldo', telefone2: '17 99000-0008', cadastroEm: '2025-12-19T10:15:00' },
+                    { id: 5, nome1: 'Edna', telefone1: '17 99000-0009', nome2: 'Celso', telefone2: '17 99000-0010', cadastroEm: '2025-12-19T10:20:00' }
                 ]
             },
             'domingo-7h30': {
                 casais: [
-                    { id: 1, nome1: 'Cleusa', nome2: 'Edson', telefone: '17 99000-0011', cadastroEm: '2025-12-19T10:00:00' },
-                    { id: 2, nome1: 'Regina', nome2: 'Nivaldo', telefone: '17 99000-0012', cadastroEm: '2025-12-19T10:05:00' },
-                    { id: 3, nome1: 'Simone', nome2: 'Antônio', telefone: '17 99000-0013', cadastroEm: '2025-12-19T10:10:00' }
+                    { id: 1, nome1: 'Cleusa', telefone1: '17 99000-0011', nome2: 'Edson', telefone2: '17 99000-0012', cadastroEm: '2025-12-19T10:00:00' },
+                    { id: 2, nome1: 'Regina', telefone1: '17 99000-0013', nome2: 'Nivaldo', telefone2: '17 99000-0014', cadastroEm: '2025-12-19T10:05:00' },
+                    { id: 3, nome1: 'Simone', telefone1: '17 99000-0015', nome2: 'Antônio', telefone2: '17 99000-0016', cadastroEm: '2025-12-19T10:10:00' }
                 ]
             },
             'domingo-9h30': {
                 casais: [
-                    { id: 1, nome1: 'Ana Eliza', nome2: 'William', telefone: '17 99000-0021', cadastroEm: '2025-12-19T10:00:00' },
-                    { id: 2, nome1: 'Ana Bazo', nome2: 'Neto', telefone: '17 99000-0022', cadastroEm: '2025-12-19T10:05:00' },
-                    { id: 3, nome1: 'Carol', nome2: 'Serginho', telefone: '17 99000-0023', cadastroEm: '2025-12-19T10:10:00' },
-                    { id: 4, nome1: 'Cintia', nome2: 'Rafael', telefone: '17 99000-0024', cadastroEm: '2025-12-19T10:15:00' },
-                    { id: 5, nome1: 'Edna', nome2: 'Celso', telefone: '17 99000-0025', cadastroEm: '2025-12-19T10:20:00' },
-                    { id: 6, nome1: 'Larissa', nome2: 'Sylvio', telefone: '17 99000-0026', cadastroEm: '2025-12-19T10:25:00' },
-                    { id: 7, nome1: 'Sônia', nome2: 'Renato', telefone: '17 99000-0027', cadastroEm: '2025-12-19T10:30:00' }
+                    { id: 1, nome1: 'Ana Eliza', telefone1: '17 99000-0021', nome2: 'William', telefone2: '17 99000-0022', cadastroEm: '2025-12-19T10:00:00' },
+                    { id: 2, nome1: 'Ana Bazo', telefone1: '17 99000-0023', nome2: 'Neto', telefone2: '17 99000-0024', cadastroEm: '2025-12-19T10:05:00' },
+                    { id: 3, nome1: 'Carol', telefone1: '17 99000-0025', nome2: 'Serginho', telefone2: '17 99000-0026', cadastroEm: '2025-12-19T10:10:00' },
+                    { id: 4, nome1: 'Cintia', telefone1: '17 99000-0027', nome2: 'Rafael', telefone2: '17 99000-0028', cadastroEm: '2025-12-19T10:15:00' },
+                    { id: 5, nome1: 'Edna', telefone1: '17 99000-0029', nome2: 'Celso', telefone2: '17 99000-0030', cadastroEm: '2025-12-19T10:20:00' },
+                    { id: 6, nome1: 'Larissa', telefone1: '17 99000-0031', nome2: 'Sylvio', telefone2: '17 99000-0032', cadastroEm: '2025-12-19T10:25:00' },
+                    { id: 7, nome1: 'Sônia', telefone1: '17 99000-0033', nome2: 'Renato', telefone2: '17 99000-0034', cadastroEm: '2025-12-19T10:30:00' }
                 ]
             },
             'domingo-17h-capela': {
                 casais: [
-                    { id: 1, nome1: 'Madá', nome2: 'Carlão', telefone: '17 99000-0031', cadastroEm: '2025-12-19T10:00:00' },
-                    { id: 2, nome1: 'Camila', nome2: 'Joelmir', telefone: '17 99000-0032', cadastroEm: '2025-12-19T10:05:00' }
+                    { id: 1, nome1: 'Madá', telefone1: '17 99000-0041', nome2: 'Carlão', telefone2: '17 99000-0042', cadastroEm: '2025-12-19T10:00:00' },
+                    { id: 2, nome1: 'Camila', telefone1: '17 99000-0043', nome2: 'Joelmir', telefone2: '17 99000-0044', cadastroEm: '2025-12-19T10:05:00' }
                 ]
             },
             'domingo-19h': {
                 casais: [
-                    { id: 1, nome1: 'Adriana', nome2: 'Beto', telefone: '17 98194-0354', cadastroEm: '2025-11-26T10:00:00' },
-                    { id: 2, nome1: 'Célia', nome2: 'Marcelo', telefone: '17 99783-4825', cadastroEm: '2025-11-26T10:05:00' },
-                    { id: 3, nome1: 'Julia', nome2: 'Thales', telefone: '17 99000-0000', cadastroEm: '2025-11-26T10:10:00' },
-                    { id: 4, nome1: 'Priscila', nome2: 'Marcelo', telefone: '17 99103-7138', cadastroEm: '2025-11-26T10:15:00' },
-                    { id: 5, nome1: 'Vanda', nome2: 'Carlinhos', telefone: '17 99155-6458', cadastroEm: '2025-11-26T10:20:00' }
+                    { id: 1, nome1: 'Adriana', telefone1: '17 98194-0354', nome2: 'Beto', telefone2: '17 98194-0355', cadastroEm: '2025-11-26T10:00:00' },
+                    { id: 2, nome1: 'Célia', telefone1: '17 99783-4825', nome2: 'Marcelo', telefone2: '17 99783-4826', cadastroEm: '2025-11-26T10:05:00' },
+                    { id: 3, nome1: 'Julia', telefone1: '17 99000-0001', nome2: 'Thales', telefone2: '17 99000-0002', cadastroEm: '2025-11-26T10:10:00' },
+                    { id: 4, nome1: 'Priscila', telefone1: '17 99103-7138', nome2: 'Marcelo', telefone2: '17 99103-7139', cadastroEm: '2025-11-26T10:15:00' },
+                    { id: 5, nome1: 'Vanda', telefone1: '17 99155-6458', nome2: 'Carlinhos', telefone2: '17 99155-6459', cadastroEm: '2025-11-26T10:20:00' }
                 ]
             }
         };
@@ -216,7 +216,7 @@ class PastoralManager {
         const dashResponsavel = document.getElementById('dashResponsavel');
         if (responsible) {
             const casal = this.casaisPastoral.find(c => c.id === responsible.casalId);
-            dashResponsavel.innerHTML = `<p><strong>👥 ${casal.nome1} e ${casal.nome2}</strong><br>📞 ${casal.telefone}</p>`;
+            dashResponsavel.innerHTML = `<p><strong>👥 ${casal.nome1} e ${casal.nome2}</strong><br>📞 ${casal.telefone1} / ${casal.telefone2}</p>`;
         } else {
             dashResponsavel.innerHTML = '<p class="alert-warning">⚠️ Nenhum responsável definido para este mês</p>';
         }
@@ -298,8 +298,9 @@ class PastoralManager {
             <h2>${isEdit ? 'Editar' : 'Adicionar'} Casal da Pastoral</h2>
             <form id="casalForm">
                 <input type="text" id="casalNome1" placeholder="Nome (pessoa 1)" value="${casal?.nome1 || ''}" required>
+                <input type="tel" id="casalTelefone1" placeholder="Telefone pessoa 1 (17 99123-4567)" value="${casal?.telefone1 || ''}" required>
                 <input type="text" id="casalNome2" placeholder="Nome (pessoa 2)" value="${casal?.nome2 || ''}" required>
-                <input type="tel" id="casalTelefone" placeholder="Telefone com DDD (ex: 17 99123-4567)" value="${casal?.telefone || ''}" required>
+                <input type="tel" id="casalTelefone2" placeholder="Telefone pessoa 2 (17 99123-4567)" value="${casal?.telefone2 || ''}" required>
                 <button type="submit">${isEdit ? 'Salvar' : 'Adicionar'}</button>
             </form>
         `;
@@ -312,8 +313,9 @@ class PastoralManager {
             const casalData = {
                 id: casal?.id || Date.now(),
                 nome1: document.getElementById('casalNome1').value.trim(),
+                telefone1: document.getElementById('casalTelefone1').value.trim(),
                 nome2: document.getElementById('casalNome2').value.trim(),
-                telefone: document.getElementById('casalTelefone').value.trim(),
+                telefone2: document.getElementById('casalTelefone2').value.trim(),
                 cadastroEm: casal?.cadastroEm || new Date().toISOString()
             };
 
@@ -345,9 +347,11 @@ class PastoralManager {
         modalBody.innerHTML = `
             <h2>${isEdit ? 'Editar' : 'Cadastro Rápido'} - Família Sorteada</h2>
             <form id="familiaForm" class="quick-form">
-                <input type="text" id="familiaNome" placeholder="Nome da família" value="${familia?.nome || ''}" required autofocus>
+                <input type="text" id="familiaNome1" placeholder="Nome pessoa 1" value="${familia?.nome1 || ''}" required autofocus>
+                <input type="tel" id="familiaTelefone1" placeholder="Telefone 1 (17 99123-4567)" value="${familia?.telefone1 || ''}" required>
                 
-                <input type="tel" id="familiaTelefone" placeholder="Telefone (17 99123-4567)" value="${familia?.telefone || ''}" required>
+                <input type="text" id="familiaNome2" placeholder="Nome pessoa 2" value="${familia?.nome2 || ''}" required>
+                <input type="tel" id="familiaTelefone2" placeholder="Telefone 2 (17 99123-4567)" value="${familia?.telefone2 || ''}" required>
                 
                 <input type="text" id="familiaEndereco" placeholder="Endereço (Rua, número)" value="${familia?.endereco || ''}" required>
                 
@@ -366,8 +370,10 @@ class PastoralManager {
             
             const familiaData = {
                 id: familia?.id || Date.now(),
-                nome: document.getElementById('familiaNome').value.trim(),
-                telefone: document.getElementById('familiaTelefone').value.trim(),
+                nome1: document.getElementById('familiaNome1').value.trim(),
+                telefone1: document.getElementById('familiaTelefone1').value.trim(),
+                nome2: document.getElementById('familiaNome2').value.trim(),
+                telefone2: document.getElementById('familiaTelefone2').value.trim(),
                 endereco: document.getElementById('familiaEndereco').value.trim(),
                 observacoes: document.getElementById('familiaObs').value.trim(),
                 dataSorteio: document.getElementById('familiaSorteio').value + 'T19:00:00',
@@ -408,7 +414,7 @@ class PastoralManager {
                 <div class="card-header">
                     <h3>👥 ${casal.nome1} e ${casal.nome2}</h3>
                 </div>
-                <p>📞 ${casal.telefone}</p>
+                <p>📞 ${casal.telefone1}<br>📞 ${casal.telefone2}</p>
                 <p class="data-cadastro">📅 Cadastrado em ${this.formatDateTime(casal.cadastroEm)}</p>
                 <div class="card-actions">
                     <button onclick="app.showCasalPastoralModal(${JSON.stringify(casal).replace(/"/g, '&quot;')})" class="btn-edit">✏️ Editar</button>
@@ -434,7 +440,7 @@ class PastoralManager {
                     <h3>🏠 ${familia.nome}</h3>
                     <span class="badge-sorteio">🎲 Sorteado em ${this.formatDateShort(new Date(familia.dataSorteio))}</span>
                 </div>
-                <p>📞 ${familia.telefone}</p>
+                <p>📞 ${familia.telefone1}<br>📞 ${familia.telefone2}</p>
                 <p>🏠 ${familia.endereco}</p>
                 ${familia.observacoes ? `<p class="obs">📝 ${familia.observacoes}</p>` : ''}
                 <p class="data-cadastro">📅 Cadastrado em ${this.formatDateTime(familia.cadastroEm)}</p>
@@ -703,7 +709,7 @@ class PastoralManager {
                     <div class="terco-section">
                         <h4>🏠 Família</h4>
                         <p><strong>${familia?.nome || 'Família não encontrada'}</strong></p>
-                        <p>📞 ${familia?.telefone || ''}</p>
+                        <p>📞 ${familia?.telefone1 || ''}<br>📞 ${familia?.telefone2 || ''}</p>
                         <p>🏠 ${familia?.endereco || ''}</p>
                         ${familia?.observacoes ? `<p class="obs">📝 ${familia.observacoes}</p>` : ''}
                         ${familia?.dataSorteio ? `<p class="data-sorteio">🎲 Sorteado em ${this.formatDateShort(new Date(familia.dataSorteio))}</p>` : ''}
