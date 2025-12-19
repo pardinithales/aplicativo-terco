@@ -335,7 +335,7 @@ class PastoralManager {
                 telefone1: document.getElementById('casalTelefone1').value.trim(),
                 nome2: document.getElementById('casalNome2').value.trim(),
                 telefone2: document.getElementById('casalTelefone2').value.trim(),
-                cadastro_em: casal?.cadastro_em || new Date().toISOString()
+                cadastro_em: casal?.cadastroEm || new Date().toISOString()
             };
 
             try {

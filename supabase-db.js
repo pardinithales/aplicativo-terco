@@ -15,7 +15,14 @@ class SupabaseDB {
             console.error('❌ Erro ao buscar casais:', error);
             return [];
         }
-        return data || [];
+        return (data || []).map(c => ({
+            id: c.id,
+            nome1: c.nome1,
+            telefone1: c.telefone1,
+            nome2: c.nome2,
+            telefone2: c.telefone2,
+            cadastroEm: c.cadastro_em
+        }));
     }
 
     async addCasalPastoral(grupoId, casal) {
