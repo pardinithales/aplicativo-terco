@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Debug Supabase - Casais</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #f5f5f5; }
+        .result { background: white; padding: 20px; margin: 10px 0; border-radius: 8px; }
+        pre { background: #f5f5f5; padding: 10px; overflow-x: auto; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Debug Supabase - Casais Pastoral</h1>
+    
+    <button onclick="listarTodosCasais()">📋 Listar TODOS os casais</button>
+    <button onclick="listarCasaisDomingo19h()">🌙 Listar Domingo 19h</button>
+    <button onclick="verificarConexao()">🔌 Verificar Conexão</button>
+    
+    <div id="resultado" class="result"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://elwvacgobxqhzjtzgyli.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_6DEysRRiOKtD3UB27O3jaw_uHH8Ivxr';
+        
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        
+        function mostrar(html) {
+            document.getElementById('resultado').innerHTML = html;
+        }
+
+        async function verificarConexao() {
+            try {
+                const { data, error } = await supabaseClient.from('grupos').select('count');
+                if (error) throw error;
+                mostrar(`✅ Conexão OK!<pre>${JSON.stringify(data, null, 2)}</pre>`);
+            } catch (err) {
+                mostrar(`❌ Erro: ${err.message}`);
+            }
+        }
+
+        async function listarTodosCasais() {
+            try {
+                const { data, error } = await supabaseClient
+                    .from('casais_pastoral')
+                    .select('*')
+                    .order('cadastro_em', { ascending: false });
+                
+                if (error) throw error;
+                
+                mostrar(`
+                    <h2>✅ Total: ${data.length} casais encontrados</h2>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `);
+            } catch (err) {
+                mostrar(`❌ Erro: ${err.message}<pre>${JSON.stringify(err, null, 2)}</pre>`);
+            }
+        }
+
+        async function listarCasaisDomingo19h() {
+            try {
+                const { data, error } = await supabaseClient
+                    .from('casais_pastoral')
+                    .select('*')
+                    .eq('grupo_id', 'domingo-19h')
+                    .order('cadastro_em', { ascending: false });
+                
+                if (error) throw error;
+                
+                mostrar(`
+                    <h2>✅ Grupo Domingo 19h: ${data.length} casais</h2>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `);
+            } catch (err) {
+                mostrar(`❌ Erro: ${err.message}<pre>${JSON.stringify(err, null, 2)}</pre>`);
+            }
+        }
+
+        console.log('✅ Debug script carregado');
+    </script>
+</body>
+</html>

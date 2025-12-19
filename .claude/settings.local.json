@@ -17,7 +17,8 @@
       "Bash(start test-supabase.html)",
       "Bash(timeout:*)",
       "WebFetch(domain:sistema-tercos-pastoral.vercel.app)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(start debug-supabase.html)"
     ],
     "deny": [],
     "ask": []
