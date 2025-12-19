@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Terços - Pastoral Familiar | Santuário N. Sra. do Rosário</title>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
     <div class="container">
@@ -204,6 +208,7 @@
                     <h2>⚙️ Painel Administrativo</h2>
                     <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
                         <button id="testarBtn" class="btn-primary">🧪 Testar Sistema</button>
+                        <button id="migrarBtn" class="btn-primary" style="background: linear-gradient(135deg, #2196f3 0%, #03a9f4 100%);">🔄 Migrar localStorage → Firebase</button>
                         <button id="restaurarAutoBtn" class="btn-primary">♻️ Restaurar Backup Automático</button>
                         <button id="limparDadosBtn" class="btn-primary" style="background: linear-gradient(135deg, #c62828 0%, #d32f2f 100%);">🗑️ Limpar Todos os Dados</button>
                         <button id="logoutBtn" class="secondary-btn">🚪 Sair</button>
@@ -213,6 +218,8 @@
         </div>
     </div>
 
+    <script src="firebase-config.js"></script>
+    <script src="firebase-db.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
