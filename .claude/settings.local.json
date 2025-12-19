@@ -13,7 +13,8 @@
       "Bash(grep:*)",
       "Bash(start index.html)",
       "Bash(git commit:*)",
-      "Bash(claude mcp add:*)"
+      "Bash(claude mcp add:*)",
+      "Bash(start test-supabase.html)"
     ],
     "deny": [],
     "ask": []

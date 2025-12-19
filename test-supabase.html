@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Supabase Connection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .result {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success { color: #2e7d32; }
+        .error { color: #c62828; }
+        button {
+            background: #1976d2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #1565c0;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste de Conexão Supabase</h1>
+    
+    <div class="result">
+        <h2>Configuração:</h2>
+        <p><strong>URL:</strong> https://elwvacgobxqhzjtzgyli.supabase.co</p>
+        <p><strong>Key:</strong> sb_publishable_6DEysRRiOKtD3UB27O3jaw_uHH8Ivxr</p>
+    </div>
+
+    <button onclick="testarConexao()">🔌 Testar Conexão</button>
+    <button onclick="listarGrupos()">📋 Listar Grupos</button>
+    <button onclick="inserirTesteGrupo()">➕ Inserir Teste</button>
+
+    <div id="resultado" class="result" style="display:none;">
+        <h2>Resultado:</h2>
+        <div id="output"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://elwvacgobxqhzjtzgyli.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_6DEysRRiOKtD3UB27O3jaw_uHH8Ivxr';
+        
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        
+        function mostrarResultado(html) {
+            document.getElementById('resultado').style.display = 'block';
+            document.getElementById('output').innerHTML = html;
+        }
+
+        async function testarConexao() {
+            try {
+                console.log('🔌 Testando conexão...');
+                const { data, error } = await supabaseClient.from('grupos').select('count');
+                
+                if (error) {
+                    mostrarResultado(`<p class="error">❌ Erro: ${error.message}</p><pre>${JSON.stringify(error, null, 2)}</pre>`);
+                } else {
+                    mostrarResultado(`<p class="success">✅ Conexão OK! Supabase funcionando.</p><pre>${JSON.stringify(data, null, 2)}</pre>`);
+                }
+            } catch (err) {
+                mostrarResultado(`<p class="error">❌ Erro JS: ${err.message}</p><pre>${err.stack}</pre>`);
+            }
+        }
+
+        async function listarGrupos() {
+            try {
+                console.log('📋 Listando grupos...');
+                const { data, error } = await supabaseClient
+                    .from('grupos')
+                    .select('*');
+                
+                if (error) {
+                    mostrarResultado(`<p class="error">❌ Erro: ${error.message}</p><pre>${JSON.stringify(error, null, 2)}</pre>`);
+                } else {
+                    mostrarResultado(`<p class="success">✅ ${data.length} grupos encontrados:</p><pre>${JSON.stringify(data, null, 2)}</pre>`);
+                }
+            } catch (err) {
+                mostrarResultado(`<p class="error">❌ Erro JS: ${err.message}</p><pre>${err.stack}</pre>`);
+            }
+        }
+
+        async function inserirTesteGrupo() {
+            try {
+                console.log('➕ Inserindo teste...');
+                const { data, error } = await supabaseClient
+                    .from('grupos')
+                    .insert([{ id: 'teste-' + Date.now(), nome: 'Grupo Teste', icone: '🧪' }])
+                    .select();
+                
+                if (error) {
+                    mostrarResultado(`<p class="error">❌ Erro: ${error.message}</p><pre>${JSON.stringify(error, null, 2)}</pre>`);
+                } else {
+                    mostrarResultado(`<p class="success">✅ Grupo teste inserido!</p><pre>${JSON.stringify(data, null, 2)}</pre>`);
+                }
+            } catch (err) {
+                mostrarResultado(`<p class="error">❌ Erro JS: ${err.message}</p><pre>${err.stack}</pre>`);
+            }
+        }
+
+        window.onload = function() {
+            console.log('✅ Supabase Client inicializado');
+            console.log('URL:', SUPABASE_URL);
+        };
+    </script>
+</body>
+</html>
