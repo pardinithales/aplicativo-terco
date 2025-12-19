@@ -1,0 +1,14 @@
+{
+  "name": "sistema-tercos-pastoral",
+  "version": "2.1.0",
+  "description": "Sistema de Gerenciamento de Terços - Pastoral Familiar",
+  "scripts": {
+    "build": "node build-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pardinithales/aplicativo-terco.git"
+  },
+  "author": "Thales Pardini",
+  "license": "MIT"
+}

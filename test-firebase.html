@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste Firebase</title>
+</head>
+<body>
+    <h1>Teste Firebase - Sistema Terços</h1>
+    <button onclick="testarConexao()">1. Testar Conexão</button>
+    <button onclick="testarEscrita()">2. Testar Escrita</button>
+    <button onclick="testarLeitura()">3. Testar Leitura</button>
+    <button onclick="migrarDados()">4. Migrar localStorage</button>
+    <pre id="output"></pre>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="firebase-db.js"></script>
+
+    <script>
+        const output = document.getElementById('output');
+        
+        function log(msg) {
+            output.textContent += msg + '\n';
+            console.log(msg);
+        }
+
+        function testarConexao() {
+            output.textContent = '';
+            log('🧪 Testando conexão...');
+            log('Firebase: ' + typeof firebase);
+            log('Firestore: ' + typeof firebase.firestore);
+            log('✅ Firebase conectado!');
+        }
+
+        async function testarEscrita() {
+            output.textContent = '';
+            log('📝 Testando escrita no Firestore...');
+            
+            try {
+                firebaseDB.setGrupo('domingo-19h');
+                log('Grupo selecionado: domingo-19h');
+                
+                const id = await firebaseDB.addCasalPastoral({
+                    nome1: 'Teste',
+                    nome2: 'Firebase',
+                    telefone: '17 99999-9999'
+                });
+                
+                log('✅ Casal adicionado com ID: ' + id);
+            } catch (error) {
+                log('❌ Erro: ' + error.message);
+                log('Detalhes: ' + error.stack);
+            }
+        }
+
+        async function testarLeitura() {
+            output.textContent = '';
+            log('📖 Testando leitura do Firestore...');
+            
+            try {
+                firebaseDB.setGrupo('domingo-19h');
+                const casais = await firebaseDB.getCasaisPastoral();
+                
+                log('Total de casais: ' + casais.length);
+                casais.forEach(casal => {
+                    log(`- ${casal.nome1} e ${casal.nome2}`);
+                });
+                
+                log('✅ Leitura concluída!');
+            } catch (error) {
+                log('❌ Erro: ' + error.message);
+            }
+        }
+
+        async function migrarDados() {
+            output.textContent = '';
+            log('🔄 Migrando dados do localStorage...');
+            
+            try {
+                firebaseDB.setGrupo('domingo-19h');
+                const sucesso = await firebaseDB.migrateFromLocalStorage();
+                
+                if (sucesso) {
+                    log('✅ Migração concluída!');
+                } else {
+                    log('❌ Migração falhou');
+                }
+            } catch (error) {
+                log('❌ Erro: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

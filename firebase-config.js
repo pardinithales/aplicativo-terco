@@ -1,15 +1,14 @@
-// Configuração do Firebase
-// IMPORTANTE: Credenciais reais estão em .env (não versionado)
-// Para desenvolvimento local, copie .env.example para .env
+// Configuração do Firebase (Gerado automaticamente)
+// NÃO EDITE MANUALMENTE - Use build-config.js
 
 const firebaseConfig = {
-  apiKey: "SEU_API_KEY",
+  apiKey: "AIzaSyD39hFHFL35SVW6HAY-1nlyrX4zCiTWhqI",
   authDomain: "app-terco.firebaseapp.com",
   projectId: "app-terco",
   storageBucket: "app-terco.firebasestorage.app",
   messagingSenderId: "605327267124",
-  appId: "SEU_APP_ID",
-  measurementId: "SEU_MEASUREMENT_ID"
+  appId: "1:605327267124:web:9bf18c6ce7d824b0b58161",
+  measurementId: "G-BEXPMDYMY6"
 };
 
 // Inicializar Firebase
@@ -23,14 +22,14 @@ db.settings({
   cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED
 });
 
-// Habilitar persistência offline
-db.enablePersistence()
-  .catch((err) => {
-    if (err.code == 'failed-precondition') {
-      console.warn('⚠️ Persistência: Múltiplas abas abertas');
-    } else if (err.code == 'unimplemented') {
-      console.warn('⚠️ Persistência: Navegador não suporta');
-    }
-  });
+// Persistência offline desabilitada temporariamente para debug
+// db.enablePersistence()
+//   .catch((err) => {
+//     if (err.code == 'failed-precondition') {
+//       console.warn('⚠️ Persistência: Múltiplas abas abertas');
+//     } else if (err.code == 'unimplemented') {
+//       console.warn('⚠️ Persistência: Navegador não suporta');
+//     }
+//   });
 
 console.log('✅ Firebase inicializado com sucesso!');
