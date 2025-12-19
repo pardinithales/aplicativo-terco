@@ -298,9 +298,9 @@ class PastoralManager {
             <h2>${isEdit ? 'Editar' : 'Adicionar'} Casal da Pastoral</h2>
             <form id="casalForm">
                 <input type="text" id="casalNome1" placeholder="Nome (pessoa 1)" value="${casal?.nome1 || ''}" required>
-                <input type="tel" id="casalTelefone1" placeholder="Telefone pessoa 1 (17 99123-4567)" value="${casal?.telefone1 || ''}" required>
-                <input type="text" id="casalNome2" placeholder="Nome (pessoa 2)" value="${casal?.nome2 || ''}" required>
-                <input type="tel" id="casalTelefone2" placeholder="Telefone pessoa 2 (17 99123-4567)" value="${casal?.telefone2 || ''}" required>
+                <input type="tel" id="casalTelefone1" placeholder="Telefone pessoa 1 (17 99123-4567)" value="${casal?.telefone1 || ''}">
+                <input type="text" id="casalNome2" placeholder="Nome (pessoa 2)" value="${casal?.nome2 || ''}">
+                <input type="tel" id="casalTelefone2" placeholder="Telefone pessoa 2 (17 99123-4567)" value="${casal?.telefone2 || ''}">
                 <button type="submit">${isEdit ? 'Salvar' : 'Adicionar'}</button>
             </form>
         `;
@@ -348,14 +348,14 @@ class PastoralManager {
             <h2>${isEdit ? 'Editar' : 'Cadastro Rápido'} - Família Sorteada</h2>
             <form id="familiaForm" class="quick-form">
                 <input type="text" id="familiaNome1" placeholder="Nome pessoa 1" value="${familia?.nome1 || ''}" required autofocus>
-                <input type="tel" id="familiaTelefone1" placeholder="Telefone 1 (17 99123-4567)" value="${familia?.telefone1 || ''}" required>
+                <input type="tel" id="familiaTelefone1" placeholder="Telefone 1 (17 99123-4567)" value="${familia?.telefone1 || ''}">
                 
-                <input type="text" id="familiaNome2" placeholder="Nome pessoa 2" value="${familia?.nome2 || ''}" required>
-                <input type="tel" id="familiaTelefone2" placeholder="Telefone 2 (17 99123-4567)" value="${familia?.telefone2 || ''}" required>
+                <input type="text" id="familiaNome2" placeholder="Nome pessoa 2" value="${familia?.nome2 || ''}">
+                <input type="tel" id="familiaTelefone2" placeholder="Telefone 2 (17 99123-4567)" value="${familia?.telefone2 || ''}">
                 
-                <input type="text" id="familiaEndereco" placeholder="Endereço (Rua, número)" value="${familia?.endereco || ''}" required>
+                <input type="text" id="familiaEndereco" placeholder="Endereço (Rua, número)" value="${familia?.endereco || ''}">
                 
-                <input type="date" id="familiaSorteio" value="${familia?.dataSorteio ? familia.dataSorteio.split('T')[0] : new Date().toISOString().split('T')[0]}" required>
+                <input type="date" id="familiaSorteio" value="${familia?.dataSorteio ? familia.dataSorteio.split('T')[0] : new Date().toISOString().split('T')[0]}">
                 
                 <textarea id="familiaObs" placeholder="Observações (opcional)" rows="2">${familia?.observacoes || ''}</textarea>
                 
@@ -539,14 +539,14 @@ class PastoralManager {
             <form id="tercoForm">
                 <h3>📅 Data e Horário</h3>
                 <input type="date" id="tercoData" value="${terco?.data || ''}" required>
-                <input type="time" id="tercoHora" value="${terco?.hora || '20:15'}" required>
+                <input type="time" id="tercoHora" value="${terco?.hora || '20:15'}">
                 
-                <h3>✝️ Padre</h3>
-                <input type="text" id="tercoPadre" placeholder="Pe. Costante, Pe. Zé..." value="${terco?.padre || ''}" required>
+                <h3>✝️ Padre (opcional)</h3>
+                <input type="text" id="tercoPadre" placeholder="Pe. Costante, Pe. Zé..." value="${terco?.padre || ''}">
 
-                <h3>🏠 Família</h3>
-                <select id="tercoFamilia" required>
-                    <option value="">Selecione a família</option>
+                <h3>🏠 Família (opcional)</h3>
+                <select id="tercoFamilia">
+                    <option value="">A definir</option>
                     ${this.familiasSorteadas.map(f => `
                         <option value="${f.id}" ${terco?.familiaId === f.id ? 'selected' : ''}>
                             ${f.nome1} e ${f.nome2} - ${f.endereco}
@@ -579,12 +579,13 @@ class PastoralManager {
             const casaisIds = Array.from(document.querySelectorAll('#casaisCheckbox input:checked'))
                 .map(cb => parseInt(cb.value));
 
+            const familiaValue = document.getElementById('tercoFamilia').value;
             const tercoData = {
                 id: terco?.id || Date.now(),
                 data: document.getElementById('tercoData').value,
                 hora: document.getElementById('tercoHora').value,
                 padre: document.getElementById('tercoPadre').value.trim(),
-                familiaId: parseInt(document.getElementById('tercoFamilia').value),
+                familiaId: familiaValue ? parseInt(familiaValue) : null,
                 casaisIds,
                 observacoes: document.getElementById('tercoObs').value.trim(),
                 confirmacoes: terco?.confirmacoes || [],
@@ -634,7 +635,7 @@ class PastoralManager {
         const terco = this.tercos.find(t => t.id === tercoId);
         if (!terco) return;
 
-        const familia = this.familiasSorteadas.find(f => f.id === terco.familiaId);
+        const familia = terco.familiaId ? this.familiasSorteadas.find(f => f.id === terco.familiaId) : null;
         const casaisParticipantes = terco.casaisIds.map(id => this.casaisPastoral.find(c => c.id === id)).filter(Boolean);
         
         const [ano, mes, dia] = terco.data.split('-');
@@ -642,8 +643,12 @@ class PastoralManager {
         
         let mensagem = `Terço da Família\n`;
         mensagem += `Dia ${dataFormatada} - às ${terco.hora}\n`;
-        mensagem += `Residência: ${familia.nome1} e ${familia.nome2}\n`;
-        mensagem += `${familia.endereco}\n`;
+        if (familia) {
+            mensagem += `Residência: ${familia.nome1} e ${familia.nome2}\n`;
+            mensagem += `${familia.endereco}\n`;
+        } else {
+            mensagem += `Residência: A definir\n`;
+        }
         mensagem += `${terco.padre}\n`;
         
         casaisParticipantes.forEach((casal, index) => {
@@ -691,7 +696,7 @@ class PastoralManager {
         }
 
         list.innerHTML = tercosMes.sort((a, b) => a.data.localeCompare(b.data)).map(terco => {
-            const familia = this.familiasSorteadas.find(f => f.id === terco.familiaId);
+            const familia = terco.familiaId ? this.familiasSorteadas.find(f => f.id === terco.familiaId) : null;
             const casaisParticipantes = terco.casaisIds.map(id => this.casaisPastoral.find(c => c.id === id)).filter(Boolean);
             
             return `
@@ -708,11 +713,13 @@ class PastoralManager {
 
                     <div class="terco-section">
                         <h4>🏠 Família</h4>
-                        <p><strong>${familia ? `${familia.nome1} e ${familia.nome2}` : 'Família não encontrada'}</strong></p>
-                        <p>📞 ${familia?.telefone1 || ''}<br>📞 ${familia?.telefone2 || ''}</p>
-                        <p>🏠 ${familia?.endereco || ''}</p>
-                        ${familia?.observacoes ? `<p class="obs">📝 ${familia.observacoes}</p>` : ''}
-                        ${familia?.dataSorteio ? `<p class="data-sorteio">🎲 Sorteado em ${this.formatDateShort(new Date(familia.dataSorteio))}</p>` : ''}
+                        ${familia ? `
+                            <p><strong>${familia.nome1} e ${familia.nome2}</strong></p>
+                            <p>📞 ${familia.telefone1 || ''}<br>📞 ${familia.telefone2 || ''}</p>
+                            <p>🏠 ${familia.endereco || ''}</p>
+                            ${familia.observacoes ? `<p class="obs">📝 ${familia.observacoes}</p>` : ''}
+                            ${familia.dataSorteio ? `<p class="data-sorteio">🎲 Sorteado em ${this.formatDateShort(new Date(familia.dataSorteio))}</p>` : ''}
+                        ` : '<p class="alert-info">⏳ Família a definir</p>'}
                     </div>
 
                     <div class="terco-section">
