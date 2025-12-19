@@ -1,1 +1,30 @@
+# Vercel
 .vercel
+
+# Environment variables (CREDENCIAIS SENSÍVEIS)
+.env
+.env.local
+.env.production
+
+# Backups locais
+localStorage-backup-*.json
+pastoral-backup-*.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (se adicionar build tools no futuro)
+node_modules/
+dist/
+build/

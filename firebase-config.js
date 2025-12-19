@@ -1,14 +1,15 @@
 // Configuração do Firebase
-// Credenciais do projeto app-terco
+// IMPORTANTE: Credenciais reais estão em .env (não versionado)
+// Para desenvolvimento local, copie .env.example para .env
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD39hFHFL35SVW6HAY-1nlyrX4zCiTWhqI",
+  apiKey: "SEU_API_KEY",
   authDomain: "app-terco.firebaseapp.com",
   projectId: "app-terco",
   storageBucket: "app-terco.firebasestorage.app",
   messagingSenderId: "605327267124",
-  appId: "1:605327267124:web:9bf18c6ce7d824b0b58161",
-  measurementId: "G-BEXPMDYMY6"
+  appId: "SEU_APP_ID",
+  measurementId: "SEU_MEASUREMENT_ID"
 };
 
 // Inicializar Firebase
