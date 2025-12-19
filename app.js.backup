@@ -2,34 +2,21 @@ class PastoralManager {
     constructor() {
         this.grupoAtual = localStorage.getItem('grupoAtual') || null;
         this.currentMonth = new Date();
-        this.casaisPastoral = [];
-        this.familiasSorteadas = [];
-        this.escala = [];
-        this.tercos = [];
         
         if (this.grupoAtual) {
-            this.loadGrupoData().then(() => this.showApp());
+            this.loadGrupoData();
+            this.showApp();
         } else {
             this.showGrupoSelector();
         }
     }
 
-    async loadGrupoData() {
-        console.log('🔄 Carregando dados do Supabase...');
-        try {
-            this.casaisPastoral = await supaDB.getCasaisPastoral(this.grupoAtual);
-            this.familiasSorteadas = await supaDB.getFamiliasSorteadas(this.grupoAtual);
-            this.escala = await supaDB.getEscala(this.grupoAtual);
-            this.tercos = await supaDB.getTercos(this.grupoAtual);
-            console.log('✅ Dados carregados do Supabase');
-        } catch (error) {
-            console.error('❌ Erro ao carregar do Supabase, usando localStorage:', error);
-            const prefix = `grupo_${this.grupoAtual}_`;
-            this.casaisPastoral = this.loadData(prefix + 'casaisPastoral') || [];
-            this.familiasSorteadas = this.loadData(prefix + 'familiasSorteadas') || [];
-            this.escala = this.loadData(prefix + 'escala') || [];
-            this.tercos = this.loadData(prefix + 'tercos') || [];
-        }
+    loadGrupoData() {
+        const prefix = `grupo_${this.grupoAtual}_`;
+        this.casaisPastoral = this.loadData(prefix + 'casaisPastoral') || [];
+        this.familiasSorteadas = this.loadData(prefix + 'familiasSorteadas') || [];
+        this.escala = this.loadData(prefix + 'escala') || [];
+        this.tercos = this.loadData(prefix + 'tercos') || [];
     }
 
     showGrupoSelector() {
@@ -46,11 +33,11 @@ class PastoralManager {
         });
     }
 
-    async selecionarGrupo(grupo) {
+    selecionarGrupo(grupo) {
         this.grupoAtual = grupo;
         localStorage.setItem('grupoAtual', grupo);
-        await this.loadGrupoData();
-        await this.carregarExemplosGrupo();
+        this.loadGrupoData();
+        this.carregarExemplosGrupo();
         this.showApp();
     }
 
@@ -88,17 +75,11 @@ class PastoralManager {
         this.render();
     }
 
-    async carregarExemplosGrupo() {
+    carregarExemplosGrupo() {
         if (this.casaisPastoral.length === 0) {
             const dadosGrupos = this.getDadosGrupo();
             this.casaisPastoral = dadosGrupos.casais;
-            for (const casal of this.casaisPastoral) {
-                try {
-                    await supaDB.addCasalPastoral(this.grupoAtual, casal);
-                } catch (error) {
-                    console.warn('Casal já existe ou erro ao inserir:', error);
-                }
-            }
+            this.saveData('casaisPastoral', this.casaisPastoral);
         }
     }
 
@@ -326,7 +307,7 @@ class PastoralManager {
 
         document.getElementById('modal').style.display = 'block';
         
-        document.getElementById('casalForm').addEventListener('submit', async (e) => {
+        document.getElementById('casalForm').addEventListener('submit', (e) => {
             e.preventDefault();
             
             const casalData = {
@@ -335,35 +316,27 @@ class PastoralManager {
                 telefone1: document.getElementById('casalTelefone1').value.trim(),
                 nome2: document.getElementById('casalNome2').value.trim(),
                 telefone2: document.getElementById('casalTelefone2').value.trim(),
-                cadastro_em: casal?.cadastro_em || new Date().toISOString()
+                cadastroEm: casal?.cadastroEm || new Date().toISOString()
             };
 
-            try {
-                if (isEdit) {
-                    await supaDB.updateCasalPastoral(casal.id, casalData);
-                    const index = this.casaisPastoral.findIndex(c => c.id === casal.id);
-                    this.casaisPastoral[index] = casalData;
-                } else {
-                    const novoCasal = await supaDB.addCasalPastoral(this.grupoAtual, casalData);
-                    this.casaisPastoral.push(novoCasal);
-                }
-                this.closeModal();
-                this.render();
-            } catch (error) {
-                alert('Erro ao salvar: ' + error.message);
+            if (isEdit) {
+                const index = this.casaisPastoral.findIndex(c => c.id === casal.id);
+                this.casaisPastoral[index] = casalData;
+            } else {
+                this.casaisPastoral.push(casalData);
             }
+
+            this.saveData('casaisPastoral', this.casaisPastoral);
+            this.closeModal();
+            this.render();
         });
     }
 
-    async deleteCasalPastoral(id) {
+    deleteCasalPastoral(id) {
         if (confirm('Excluir este casal da pastoral?')) {
-            try {
-                await supaDB.deleteCasalPastoral(id);
-                this.casaisPastoral = this.casaisPastoral.filter(c => c.id !== id);
-                this.render();
-            } catch (error) {
-                alert('Erro ao deletar: ' + error.message);
-            }
+            this.casaisPastoral = this.casaisPastoral.filter(c => c.id !== id);
+            this.saveData('casaisPastoral', this.casaisPastoral);
+            this.render();
         }
     }
 

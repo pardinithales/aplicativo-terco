@@ -14,7 +14,10 @@
       "Bash(start index.html)",
       "Bash(git commit:*)",
       "Bash(claude mcp add:*)",
-      "Bash(start test-supabase.html)"
+      "Bash(start test-supabase.html)",
+      "Bash(timeout:*)",
+      "WebFetch(domain:sistema-tercos-pastoral.vercel.app)",
+      "Bash(cp:*)"
     ],
     "deny": [],
     "ask": []
