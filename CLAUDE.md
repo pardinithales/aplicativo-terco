@@ -3,7 +3,7 @@
 ## 📋 SOBRE O PROJETO
 
 **Nome:** Sistema de Gerenciamento de Terços - Pastoral Familiar  
-**Versão:** 2.1  
+**Versão:** 2.2  
 **Cliente:** Santuário Nossa Senhora do Rosário - Barretos/SP  
 **Deploy:** https://sistema-tercos-pastoral.vercel.app  
 **Repositório:** https://github.com/pardinithales/aplicativo-terco
@@ -11,15 +11,25 @@
 ### Propósito
 Sistema web para organizar e gerenciar terços (orações do rosário) de 5 grupos diferentes de missa da Pastoral Familiar. Cada grupo opera de forma completamente independente com seus próprios membros, famílias sorteadas e agendamentos.
 
+### 📚 Documentação Adicional
+- **DESENVOLVIMENTO.md** - Histórico completo de desenvolvimento, saga do Firebase, preferências do cliente
+- **CREDENTIALS.md** - Segurança e credenciais (Firebase - não usado)
+- **FIREBASE-SETUP.md** - Setup Firebase (tentativa abandonada)
+- **README.md** - Documentação de usuário
+- **TESTES.md** - Relatório de testes (92 testes)
+- **EXEMPLOS-USO.md** - Casos de uso práticos
+
 ---
 
 ## 🏗️ ARQUITETURA
 
 ### Stack Tecnológica
 - **Frontend:** HTML5, CSS3, JavaScript Vanilla (ES6+)
-- **Armazenamento:** localStorage (navegador) - **EM MIGRAÇÃO PARA FIREBASE**
+- **Armazenamento:** localStorage (navegador) - **DECISÃO FINAL após tentativa Firebase**
 - **Deploy:** Vercel (static site)
 - **Versionamento:** Git + GitHub
+
+> ⚠️ **Nota importante:** Firebase foi testado e **abandonado** após 2h de debugging (19/12/2024). Ver `DESENVOLVIMENTO.md` para detalhes completos da saga.
 
 ### Estrutura de Arquivos
 ```
@@ -56,14 +66,16 @@ Cada grupo representa um horário de missa com membros independentes:
 
 ### 2. Gestão de Casais da Pastoral
 - CRUD completo (Create, Read, Update, Delete)
-- Dados: nome1, nome2, telefone (com DDD), data de cadastro
+- Dados: nome1, **telefone1**, nome2, **telefone2** (com DDD), data de cadastro
 - Membros fixos que participam dos terços
+- ✅ **Telefones separados** por pessoa (implementado 19/12/2024)
 
 ### 3. Famílias Sorteadas
 - Cadastro rápido mobile-friendly
-- Dados: nome, telefone, endereço, observações, data sorteio
+- Dados: nome1, **telefone1**, nome2, **telefone2**, endereço, observações, data sorteio
 - Sorteio feito presencialmente na igreja (2º domingo/mês)
 - Sistema apenas registra as famílias sorteadas
+- ✅ **Telefones separados** por pessoa (implementado 19/12/2024)
 
 ### 4. Escala Mensal da Pasta
 - Define casal responsável pela organização do mês
@@ -90,10 +102,11 @@ Casal 2: Tales e julia
 Botão "Copiar WhatsApp" copia para clipboard
 
 ### 7. Sistema de Backup
-- **Automático:** A cada 5 dias (432.000.000ms)
-- **Manual:** Exporta JSON com timestamp
-- **Avisos:** Após 10 dias sem backup manual
+- **Automático:** A cada 5 dias (432.000.000ms) - **silencioso, não intrusivo**
+- **Manual:** Exporta JSON com timestamp via botão no Admin
+- **Avisos:** Após 10 dias sem backup manual (não mostra a cada seleção de grupo)
 - **Estrutura:** Inclui grupo, dados e metadata
+- ⚠️ **Preferência do cliente:** Backup não deve ser intrusivo ou aparecer toda hora
 
 ### 8. Painel Administrativo
 **Acesso:** Login `thales` / Senha `thales`
