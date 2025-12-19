@@ -238,7 +238,7 @@ class PastoralManager {
                     <div class="dashboard-terco">
                         <div class="terco-date">${this.formatDateShort(new Date(terco.data))}</div>
                         <div class="terco-info-dash">
-                            <strong>${familia?.nome || 'Família não encontrada'}</strong>
+                            <strong>${familia ? `${familia.nome1} e ${familia.nome2}` : 'Família não encontrada'}</strong>
                             <p>🕐 ${terco.hora} • ${terco.padre}</p>
                             <p>📍 ${familia?.endereco || ''}</p>
                             ${total > 0 ? `<span class="badge">${confirmados}/${total} confirmados</span>` : '<span class="badge-warning">Sem casais definidos</span>'}
@@ -437,7 +437,7 @@ class PastoralManager {
         list.innerHTML = this.familiasSorteadas.map(familia => `
             <div class="card">
                 <div class="card-header">
-                    <h3>🏠 ${familia.nome}</h3>
+                    <h3>🏠 ${familia.nome1} e ${familia.nome2}</h3>
                     <span class="badge-sorteio">🎲 Sorteado em ${this.formatDateShort(new Date(familia.dataSorteio))}</span>
                 </div>
                 <p>📞 ${familia.telefone1}<br>📞 ${familia.telefone2}</p>
@@ -549,7 +549,7 @@ class PastoralManager {
                     <option value="">Selecione a família</option>
                     ${this.familiasSorteadas.map(f => `
                         <option value="${f.id}" ${terco?.familiaId === f.id ? 'selected' : ''}>
-                            ${f.nome} - ${f.endereco}
+                            ${f.nome1} e ${f.nome2} - ${f.endereco}
                         </option>
                     `).join('')}
                 </select>
@@ -642,7 +642,7 @@ class PastoralManager {
         
         let mensagem = `Terço da Família\n`;
         mensagem += `Dia ${dataFormatada} - às ${terco.hora}\n`;
-        mensagem += `Residência: ${familia.nome}\n`;
+        mensagem += `Residência: ${familia.nome1} e ${familia.nome2}\n`;
         mensagem += `${familia.endereco}\n`;
         mensagem += `${terco.padre}\n`;
         
@@ -708,7 +708,7 @@ class PastoralManager {
 
                     <div class="terco-section">
                         <h4>🏠 Família</h4>
-                        <p><strong>${familia?.nome || 'Família não encontrada'}</strong></p>
+                        <p><strong>${familia ? `${familia.nome1} e ${familia.nome2}` : 'Família não encontrada'}</strong></p>
                         <p>📞 ${familia?.telefone1 || ''}<br>📞 ${familia?.telefone2 || ''}</p>
                         <p>🏠 ${familia?.endereco || ''}</p>
                         ${familia?.observacoes ? `<p class="obs">📝 ${familia.observacoes}</p>` : ''}
