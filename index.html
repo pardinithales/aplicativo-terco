@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Terços - Pastoral Familiar | Santuário N. Sra. do Rosário</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-logo">✝️</div>
+            <h1>Sistema de Gerenciamento de Terços</h1>
+            <p class="header-subtitle">Pastoral Familiar</p>
+            <p class="header-location">Santuário Nossa Senhora do Rosário • Barretos - SP</p>
+        </header>
+
+        <div id="grupoSelector" class="grupo-selector">
+            <div class="grupo-selector-header">
+                <h2>Selecione seu Grupo de Terço</h2>
+                <p>Cada grupo possui seus próprios dados e membros</p>
+            </div>
+            <div class="grupo-cards">
+                <div class="grupo-card" data-grupo="sabado-19h30">
+                    <div class="grupo-icon">🕯️</div>
+                    <h3>Sábado 19h30</h3>
+                    <p class="grupo-membros">5 casais</p>
+                </div>
+                <div class="grupo-card" data-grupo="domingo-7h30">
+                    <div class="grupo-icon">🌅</div>
+                    <h3>Domingo 7h30</h3>
+                    <p class="grupo-membros">3 casais</p>
+                </div>
+                <div class="grupo-card" data-grupo="domingo-9h30">
+                    <div class="grupo-icon">☀️</div>
+                    <h3>Domingo 9h30</h3>
+                    <p class="grupo-membros">7 casais</p>
+                </div>
+                <div class="grupo-card" data-grupo="domingo-17h-capela">
+                    <div class="grupo-icon">⛪</div>
+                    <h3>Domingo 17h Capela</h3>
+                    <p class="grupo-membros">2 casais</p>
+                </div>
+                <div class="grupo-card" data-grupo="domingo-19h">
+                    <div class="grupo-icon">🌙</div>
+                    <h3>Domingo 19h</h3>
+                    <p class="grupo-membros">5 casais</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="grupoAtual" class="grupo-atual" style="display: none;">
+            <span id="grupoNome"></span>
+            <button id="trocarGrupo" class="btn-trocar">↻ Trocar Grupo</button>
+        </div>
+
+        <nav class="tabs" style="display: none;">
+            <button class="tab-btn active" data-tab="dashboard">📊 Dashboard</button>
+            <button class="tab-btn" data-tab="pastoral">👥 Casais Pastoral</button>
+            <button class="tab-btn" data-tab="familias">🏠 Famílias Sorteadas</button>
+            <button class="tab-btn" data-tab="escala">📋 Escala Pasta</button>
+            <button class="tab-btn" data-tab="tercos">✝️ Terços</button>
+        </nav>
+
+        <main>
+            <section id="tab-dashboard" class="tab-content active">
+                <h2>Dashboard</h2>
+                
+                <div class="dashboard-grid">
+                    <div class="stat-card highlight">
+                        <div class="stat-icon">🏠</div>
+                        <div class="stat-content">
+                            <h3>Famílias Aguardando</h3>
+                            <p class="stat-value" id="proximoSorteio">-</p>
+                            <p class="stat-label" id="diasParaSorteio">-</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <h3>Casais da Pastoral</h3>
+                            <p class="stat-value" id="totalCasaisPastoral">0</p>
+                            <p class="stat-label">cadastrados</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">🏠</div>
+                        <div class="stat-content">
+                            <h3>Famílias Sorteadas</h3>
+                            <p class="stat-value" id="totalFamilias">0</p>
+                            <p class="stat-label">aguardando terço</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">✝️</div>
+                        <div class="stat-content">
+                            <h3>Terços Este Mês</h3>
+                            <p class="stat-value" id="tercosMes">0</p>
+                            <p class="stat-label">agendados</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h3>📋 Responsável da Pasta - <span id="dashMesAtual"></span></h3>
+                    <div id="dashResponsavel" class="info-box"></div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h3>✝️ Próximos Terços</h3>
+                    <div id="dashProximosTercos"></div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h3>📆 Calendário do Mês</h3>
+                    <div id="calendario" class="calendario"></div>
+                </div>
+            </section>
+
+            <section id="tab-pastoral" class="tab-content">
+                <h2>Casais da Pastoral</h2>
+                <p class="subtitle">Membros fixos que participam dos terços</p>
+                <button id="addCasalPastoralBtn" class="btn-primary">➕ Adicionar Casal</button>
+                <div id="casaisPastoralList"></div>
+            </section>
+
+            <section id="tab-familias" class="tab-content">
+                <h2>Famílias Sorteadas</h2>
+                <p class="subtitle">Cadastro rápido das famílias sorteadas na Igreja</p>
+                
+                <div class="info-banner">
+                    <strong>🎲 Sorteio:</strong> <span id="proximoSorteioInfo"></span>
+                </div>
+
+                <button id="addFamiliaBtn" class="btn-primary btn-large">➕ Cadastrar Família Sorteada</button>
+                <div id="familiaslist"></div>
+            </section>
+
+            <section id="tab-escala" class="tab-content">
+                <h2>Escala Mensal da Pasta</h2>
+                <p class="subtitle">Casal responsável pela organização do mês</p>
+                <form id="escalaForm">
+                    <select id="escalaMonth" required></select>
+                    <select id="escalaCasal" required>
+                        <option value="">Selecione o casal responsável</option>
+                    </select>
+                    <button type="submit">Definir Responsável</button>
+                </form>
+                <div id="escalaList"></div>
+            </section>
+
+            <section id="tab-tercos" class="tab-content">
+                <h2>Terços Agendados</h2>
+                
+                <div class="month-selector">
+                    <button id="prevMonth">◀</button>
+                    <h3 id="currentMonth"></h3>
+                    <button id="nextMonth">▶</button>
+                </div>
+
+                <div id="monthResponsible" class="alert-info"></div>
+
+                <button id="addTercoBtn" class="btn-primary">➕ Adicionar Terço</button>
+                
+                <div id="tercosList"></div>
+            </section>
+        </main>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="modalBody"></div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-actions">
+                <button id="exportBtn" class="secondary-btn">📥 Exportar Dados</button>
+                <button id="importBtn" class="secondary-btn">📤 Importar Dados</button>
+                <button id="adminBtn" class="secondary-btn" style="opacity: 0.3;">⚙️</button>
+                <input type="file" id="importFile" accept=".json" style="display: none;">
+            </div>
+            <div class="footer-info">
+                <p>✝️ Santuário Nossa Senhora do Rosário - Barretos/SP</p>
+                <p class="footer-credits">Sistema desenvolvido para a Pastoral Familiar • v2.1 • Backup automático a cada 5 dias</p>
+            </div>
+        </footer>
+
+        <div id="adminModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeAdmin">&times;</span>
+                <div id="adminLogin">
+                    <h2>🔐 Área Administrativa</h2>
+                    <form id="loginForm" style="margin-top: 20px;">
+                        <input type="text" id="adminUser" placeholder="Usuário" required autofocus>
+                        <input type="password" id="adminPass" placeholder="Senha" required>
+                        <button type="submit" class="btn-primary">Entrar</button>
+                    </form>
+                </div>
+                <div id="adminPanel" style="display: none;">
+                    <h2>⚙️ Painel Administrativo</h2>
+                    <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
+                        <button id="testarBtn" class="btn-primary">🧪 Testar Sistema</button>
+                        <button id="restaurarAutoBtn" class="btn-primary">♻️ Restaurar Backup Automático</button>
+                        <button id="limparDadosBtn" class="btn-primary" style="background: linear-gradient(135deg, #c62828 0%, #d32f2f 100%);">🗑️ Limpar Todos os Dados</button>
+                        <button id="logoutBtn" class="secondary-btn">🚪 Sair</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
